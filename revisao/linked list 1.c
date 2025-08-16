@@ -14,6 +14,8 @@ void insertAtEnd (int num, Node **head);
 
 void remover(int num, Node **head);
 
+void insertSort(int num, Node **head);
+
 int main(){
 
     Node *head=NULL;
@@ -22,9 +24,12 @@ int main(){
     for(int i=0;i<5;i++){
         scanf(" %d",&entrada);
         //insertAtBegginer(entrada,&head);
-        insertAtEnd(entrada,&head);
+        //insertAtEnd(entrada,&head);
+        insertSort(entrada,&head);
+        printList(head);
     }
     //remover(1,&head);
+    printf("fim\n\n\n");
     printList(head);
 
     
@@ -92,4 +97,36 @@ void remover(int num, Node **head){
             aux=aux->next;
         }
     }
+}
+
+void insertSort(int num, Node **head){
+    Node *new=malloc(sizeof(Node));
+    new->next=NULL;
+    new->num=num;
+
+    //se lista estiver vazia
+    if(*head ==NULL){
+        *head=new;
+        return;
+    }
+    //insersao antes do comeco
+    else if((*head)->num > num){
+        new->next=*head;
+        *head=new;
+    }
+    //Inserindo no meio ou no final
+    else{
+        Node *aux=*head;
+
+        while(aux->next!=NULL){
+            if(num < aux->next->num){
+                new->next=aux->next;
+                aux->next=new;
+                return;
+            }
+            aux=aux->next;
+        }
+        aux->next=new;
+    }
+
 }
