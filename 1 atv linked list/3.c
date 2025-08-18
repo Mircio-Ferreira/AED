@@ -16,11 +16,20 @@ void pop(Node **head){
         printf("Lista VAZIA!");
         return;
     }
-    Node *temp,*aux=*head;
-    
-    while(aux!=NULL){
-
+    // Apenas 1 no
+    if((*head)->next==NULL){
+        free(*head);
+        *head=NULL;
+        return;
     }
+    Node *temp,*aux=*head;
+
+    while(aux->next->next!=NULL){
+        aux=aux->next;
+    }
+    temp=aux->next;
+    free(temp);
+    aux->next=NULL;    
 }
 
 int main(){
