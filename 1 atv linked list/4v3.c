@@ -23,6 +23,19 @@ void insertRelative(Node **head, int posi , int n){
         return;
     }
     Node *aux = *head;
+    int cont=0;
+    while( aux !=NULL && cont!= posi-1){
+        aux=aux->next;
+        cont++;
+    }
+    //posi invalida
+    if(aux==NULL) {
+        printf("posi invalida!");
+        free(new);
+        return;
+    }
+    new->next=aux->next;
+    aux->next=new;
 }
 
 int main(){
