@@ -17,6 +17,12 @@ void insertRelative(Node **head, int posi , int n){
     new->n=n;
     new->next=NULL;
     
+    if(posi == 0){
+        new->next=*head;
+        *head=new;
+        return;
+    }
+    Node *aux = *head;
 }
 
 int main(){
