@@ -99,8 +99,8 @@ void intercalePushWithqueue(Pessoa *headF1,Pessoa *headF2,Pessoa **headPilh1){
 
 void interleaveQueuesToStack(Pessoa *headF1,Pessoa *headF2,Pessoa **headPilha2){
     int flag=1;
-    while(1){
-        if(headF1==headF2) break; //Basicamente quandos ambas forem 
+    while(headF1!=headF2){
+        //if(headF1==headF2) break; //Basicamente quandos ambas forem 
         if(headF1!=NULL && flag){
             Pessoa *new=malloc(sizeof(Pessoa));
             strcpy(new->name,headF1->name);
@@ -125,6 +125,7 @@ void printPessoa(Pessoa *head){
     printf("\n\n");
     while(head!=NULL){
         printf("[%d] %s\n",cont,head->name);
+        cont++;
         head=head->prox;
     }
 }

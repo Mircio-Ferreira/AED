@@ -29,7 +29,7 @@ void pop(Node **head);
 
 void printBase(Node *head);
 
-void printFrist(Node *head);
+void printTop(Node *head);
 
 void printParPosition(Node *head);
 
@@ -49,7 +49,7 @@ int main(){
             push(&head,input);
         }
         else if(comand==2) printBase(head);
-        else if(comand==3) printFrist(head);
+        else if(comand==3) printTop(head);
         else if(comand==4) pop(&head);
         else if(comand==5) printParPosition(head);
         else if(comand==6) break;
@@ -83,7 +83,7 @@ void printBase(Node *head){
     }
 }
 
-void printFrist(Node *head){
+void printTop(Node *head){
     if(head!=NULL) printf("\nPrimeiro :%d\n",head->n);
     else printf("\n\nLista vazia\n");
 }
