@@ -1,26 +1,32 @@
 #include <stdio.h>
 
-void insertionSort(int *array,int len){
+void insertionSort(int len,int *array){
     for(int i=1;i<len;i++){
-        int j=i;
-        while(array[j]<array[j-1] && j>0){
-            int aux = array[j];
-            array[j]=array[j-1];
-            array[j-1]=aux;
-            j--;
+        int posi=i;
+        //posi poderia ser >0
+        while(posi!=0 && array[posi]<array[posi-1]){
+            int temp=array[posi];
+            array[posi]=array[posi-1];
+            array[posi-1]=temp;
+            posi--;
         }
     }
-};
+}
 
 int main(){
+    
+    int len=10;
+    int array[]={6,5,9,1,0,2,8,3,9,10};
 
-    int len=5;
-    int array[5]={5,4,3,2,1};
-    insertionSort(array,len);
-    for(int i=0;i<5;i++){
+    for(int i=0;i<len;i++){
+        printf("|%d|",array[i]);
+    }
+    printf("\n");
+    insertionSort(len,array);
+
+     for(int i=0;i<len;i++){
         printf("|%d|",array[i]);
     }
 
     return 0;
 }
-
