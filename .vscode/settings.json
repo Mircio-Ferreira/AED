@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.dbclient-js": "javascript",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "1 lista linkedlistt": "c"
     }
 }
