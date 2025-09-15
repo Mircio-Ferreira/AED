@@ -7,6 +7,16 @@ typedef struct Node{
     struct Node *prev; 
 } Node;
 
+//questao 1
+void insertSort(Node **head,Node **tail,int n){
+    Node *new=malloc(sizeof(Node));
+    new->n=n;
+    if(*head==NULL){
+        *head=*tail=new;
+        new->next=NULL;
+        new->prev=NULL;
+    }
+}
 
 int main(){
 
