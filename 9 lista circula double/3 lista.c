@@ -13,6 +13,8 @@ int len(Node *head,Node *tail);
 
 void print(Node *head,Node *tail);
 
+void printReverse(Node *head,Node *tail);
+
 int checkPalidromo(Node *head,Node *tail);
 
 int main(){
@@ -28,6 +30,8 @@ int main(){
 
 
     print(head,tail);
+
+    printReverse(head,tail);
 
     printf("\n|%d|\n",checkPalidromo(head,tail));
 
@@ -96,4 +100,15 @@ int checkPalidromo(Node *head,Node *tail){
     }
 
     return 1;
+}
+
+void printReverse(Node *head,Node *tail){
+    if(head!=NULL){
+        Node *aux=tail;
+        do{
+            printf("|%c|",aux->c);
+            aux=aux->prev;
+        }while(aux!=tail);
+    }
+    printf("\n");
 }
