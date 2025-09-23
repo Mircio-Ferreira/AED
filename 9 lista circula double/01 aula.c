@@ -7,9 +7,9 @@ typedef struct Node{
     struct Node *prev;
 }Node;
 
-void insertBeging(Node **head,Node **tail,int n);
+void insertBeginning(Node **head,Node **tail,int n);
 
-void removeBeging(Node **head,Node **tail);
+void removeBeginning(Node **head,Node **tail);
 
 void insertFinish(Node **head,Node **tail,int n);
 
@@ -22,16 +22,16 @@ void printReverse(Node *head,Node *tail);
 
 int main(){
     Node *tail=NULL,*head=NULL;
-    insertBeging(&head,&tail,5);
-    insertBeging(&head,&tail,4);
-    insertBeging(&head,&tail,3);
-    insertBeging(&head,&tail,2);
-    insertBeging(&head,&tail,1);
+    insertBeginning(&head,&tail,5);
+    insertBeginning(&head,&tail,4);
+    insertBeginning(&head,&tail,3);
+    insertBeginning(&head,&tail,2);
+    insertBeginning(&head,&tail,1);
 
     print(head,tail);
 
-    removeBeging(&head,&tail);
-    removeBeging(&head,&tail);
+    removeBeginning(&head,&tail);
+    removeBeginning(&head,&tail);
     
     print(head,tail);
 
@@ -56,7 +56,7 @@ int main(){
     return 0;
 }
 
-void insertBeging(Node **head,Node **tail,int n){
+void insertBeginning(Node **head,Node **tail,int n){
     Node *new=malloc(sizeof(Node));
     new->n=n;
     if(*head==NULL){
@@ -91,7 +91,7 @@ void insertFinish(Node **head,Node **tail,int n){
     }
 }
 
-void removeBeging(Node **head,Node **tail){
+void removeBeginning(Node **head,Node **tail){
     if(*head!=NULL){
         Node *remove=*head;
         if(*head==*tail) *head=*tail=NULL;
