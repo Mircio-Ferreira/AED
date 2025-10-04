@@ -22,7 +22,10 @@ int main(){
         scanf("%d %d %d",&n,&k,&m);
         if(k==0 && n ==0 && m== 0) break;
         
-        for(int i=1;i<n+1;i++) insertBegining(&head,&tail,i);
+        for(int i=1;i<n+1;i++) {
+            insertBegining(&head,&tail,i);
+
+        }
         busca(&head,&tail,k,m);
     }
 
