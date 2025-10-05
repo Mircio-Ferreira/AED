@@ -45,6 +45,8 @@ int main(){
     insertFinish(&head,&tail,5);
     insertFinish(&head,&tail,6);
     insertFinish(&head,&tail,7);
+    insertFinish(&head,&tail,8);
+
     print(head);
 
     multiplicacao(head,tail);
@@ -69,3 +71,4 @@ void multiplicacao(Node *head,Node *tail){
         if(cont%2!=0) printf("umltima posi %d\t %dx%d = %d",nPar,nPar,nPar,(nPar*nPar));
     }
 }
+
