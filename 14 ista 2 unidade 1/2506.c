@@ -19,8 +19,8 @@ int main(){
     int time,minutos,criticalMinutes;
 
     while(1){
-        scanf("%d",&contPatient);
-        if(contPatient==0) break;
+        if (scanf("%d", &contPatient) != 1) break;
+        //scanf("%d", &contPatient);
         for(int i=0;i<contPatient;i++){
             scanf("%d %d %d",&time,&minutos,&criticalMinutes);
             insertEnd(&head,&tail,time,minutos,criticalMinutes);
@@ -38,7 +38,7 @@ void insertEnd(Node **head,Node **tail,int time,int minutes,int critialMinutes){
     new->critialMinutes=critialMinutes;
     new->next=NULL;
     if(*head==NULL){
-        *head=*tail=NULL;
+        *head=*tail=new;
         new->prev=NULL;
     }
     else{
@@ -47,6 +47,7 @@ void insertEnd(Node **head,Node **tail,int time,int minutes,int critialMinutes){
         *tail=new;
     }
 }
+
 
 void freeList(Node **head,Node **tail){
     if(*head!=NULL){
@@ -61,7 +62,20 @@ void freeList(Node **head,Node **tail){
 }
 
 int checkCritical(Node *head,Node *tail){
-    int cont=0;
 
+    int cont = 0;
+    int lastStartedAttendiment= 7*60;
+    Node *aux=head;
+
+    while(aux!=NULL){
+        
+        while(lastStartedAttendiment <  ((aux->time*60)+aux->minutes) ) lastStartedAttendiment+=30;
+
+        if(lastStartedAttendiment-((aux->time*60)+aux->minutes) > aux->critialMinutes) cont++;
+
+        lastStartedAttendiment+=30;
+
+        aux=aux->next;
+    }
     return cont;
 }
