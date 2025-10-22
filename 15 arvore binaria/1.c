@@ -12,7 +12,40 @@ void PreOrdemRED(Tree *root);
 void inOrdemERD(Tree *root);
 void PosOrdemEDR(Tree *root);
 
+// ---- Insert ---- 
+void insertTree(Tree **root,int key);
+
+// ---- Search ----
+int searchTree(Tree *root,int key);
+
 int main(){
+
+    Tree *root=NULL;
+
+    insertTree(&root,50);
+    insertTree(&root, 30);
+    insertTree(&root, 70);
+    insertTree(&root, 20);
+    insertTree(&root, 40);
+    insertTree(&root, 60);
+    insertTree(&root, 80);
+
+    PreOrdemRED(root);
+    printf("\n");
+
+    inOrdemERD(root);
+    printf("\n");
+
+    PosOrdemEDR(root);
+    printf("\n");
+
+    printf("\n");
+    printf("\n");
+
+    
+    if(searchTree(root,30)) printf("achou!\n");
+    else printf("nao achou!\n");
+
 
     return 0;
 }
@@ -20,25 +53,54 @@ int main(){
 void PreOrdemRED(Tree *root){
     if(root!=NULL){
         printf("|%d|",root->key);
-        printRED(root->left);
-        printRED(root->right);
+        PreOrdemRED(root->left);
+        PreOrdemRED(root->right);
     }
-    printf("\n");
 }
 
 void inOrdemERD(Tree *root){
     if(root!=NULL){
         inOrdemERD(root->left);
-        printf("%d",root->key);
+        printf("|%d|",root->key);
         inOrdemERD(root->right);
     }
-    printf("\n");
 }
 
 void PosOrdemEDR(Tree *root){
     if(root!=NULL){
         PosOrdemEDR(root->left);
         PosOrdemEDR(root->right);
-        PosOrdemEDR(root->key);
+        printf("|%d|",root->key);
     }
+}
+
+/* Analogia : 
+✅ root → Tree **
+✅ *root → Tree * (nó atual)
+✅ (*root)->left → Tree * (subárvore esquerda)
+✅ &(*root)->left → Tree ** (endereço do ponteiro da esquerda → o que a função espera)
+*/
+void insertTree(Tree **root,int key){
+    if(*root==NULL){
+        *root=malloc(sizeof(Tree));
+        (*root)->left=NULL;
+        (*root)->right=NULL;
+        (*root)->key=key;
+    }
+    else{
+        if((*root)->key > key) insertTree(&(*root)->left,key);
+
+        else if((*root)->key < key) insertTree(&(*root)->right,key);
+    }
+}
+
+
+int searchTree(Tree *root,int key){
+    if(root == NULL) return 0;
+    else if (root->key == key) return 1;
+    else if(root->key > key) return searchTree(root->left,key);
+    else if(root->key < key) return searchTree(root->right,key);
+
+    // para compilador nao reclamar
+    return 0;
 }
