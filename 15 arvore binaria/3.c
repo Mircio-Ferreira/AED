@@ -113,5 +113,13 @@ void printLeaf(Tree *root){
 }
 
 int lenght_Tree(Tree *root){
-    return 0;
+    
+    if(root==NULL) return -1;
+
+    int left = lenght_Tree(root->left);
+    int right = lenght_Tree(root->right);
+
+    if(left>right) left++;
+    else right++;
+    
 }
