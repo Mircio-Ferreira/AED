@@ -23,6 +23,9 @@ void Smaller_key(Tree *root);
 
 int lenght_Tree(Tree *root);
 
+//remocao
+void remove_root(Tree **root,int key_remove);
+
 int main(){
     Tree *root=NULL;
     insert_Tree(&root, 8);
@@ -121,5 +124,9 @@ int lenght_Tree(Tree *root){
 
     if(left>right) left++;
     else right++;
+    
+}
+
+void remove_root(Tree **root,int key_remove){
     
 }
