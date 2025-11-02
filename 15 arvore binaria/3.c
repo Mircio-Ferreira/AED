@@ -25,6 +25,7 @@ int lenght_Tree(Tree *root);
 
 //remocao
 void remove_root(Tree **root,int key_remove);
+Tree *maior_direita(Tree **root);
 
 int main(){
     Tree *root=NULL;
@@ -53,6 +54,21 @@ int main(){
 
     Bigest_key(root);
     Smaller_key(root);
+
+
+    printf("\n\n--- Removendo nós ---\n");
+
+    printf("\nRemovendo 1 (folha)\n");
+    remove_root(&root, 1);
+    PrintInOrder(root);
+
+    printf("\n\nRemovendo 14 (1 filho)\n");
+    remove_root(&root, 14);
+    PrintInOrder(root);
+
+    printf("\n\nRemovendo 3 (2 filhos)\n");
+    remove_root(&root, 3);
+    PrintInOrder(root);
 
     return 0;
 }
@@ -127,6 +143,46 @@ int lenght_Tree(Tree *root){
     
 }
 
-void remove_root(Tree **root,int key_remove){
-    
+
+
+
+Tree *maior_direita(Tree **root){
+    if((*root)->right==NULL){
+        Tree *aux=*root;
+        if((*root)->left!=NULL){
+            *root=(*root)->left;         
+        }
+        else *root=NULL;
+        return aux;
+    }
+    else return maior_direita(&(*root)->right); 
 }
+
+
+void remove_root(Tree **root,int key_remove){
+    if(*root==NULL) return;
+    
+    else if((*root)->key > key_remove) remove_root(&(*root)->left,key_remove);
+    else if((*root)->key < key_remove) remove_root(&(*root)->right,key_remove);
+
+    else{
+        if((*root)->right==NULL && (*root)->left==NULL ){// sem filhos
+            free(*root);
+            *root=NULL;
+        }
+        else if((*root)->right==NULL ^ (*root)->left==NULL){ // 1 filho
+            Tree *aux=*root;
+            if((*root)->right!=NULL) *root=(*root)->right;
+            else *root=(*root)->left;
+            free(aux);
+        }
+        else{
+            Tree *aux=maior_direita(&(*root)->left);
+            aux->right=(*root)->right;
+            aux->left=(*root)->left;
+            free(*root);
+            *root=aux;
+        }
+    }
+}
+
