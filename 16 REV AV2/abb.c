@@ -18,6 +18,10 @@ void pos_order(Tree *root);
 //buscar
 int search(Tree *root,int key);
 
+//remocao
+Tree *maior_direita(Tree **root);
+void remove_tree(Tree **root,int key_remove);
+
 int main(){
 
     Tree *root=NULL;
@@ -50,6 +54,20 @@ int main(){
     //printf("buscas : %d %d %d",search(root,5),search(root,111),search(root,-2));
 
     for(int i=0;i<11;i++) printf("|%d|",search(root,i));
+
+
+    remove_tree(&root, 1);   // folha da subárvore esquerda
+    remove_tree(&root, 4);   // outra folha
+    remove_tree(&root, 20);  // folha na extrema direita
+
+    printf("\n\n\nApos delecao\n\n\n");
+    pre_order(root);
+    printf("\n");
+    in_order(root);
+    printf("\n");
+    pos_order(root);
+    printf("\n");
+    printf("-----------------\n");
 
     return 0;
 }
@@ -97,4 +115,45 @@ int search(Tree *root,int key){
     if(root->key==key) return 1;
     else if(root->key>key)  return search(root->left,key);
     else if(root->key<key) return  search(root->right,key);
+}
+
+Tree *maior_direita(Tree **root){
+    if((*root)->right==NULL){
+        Tree *aux=*root;
+        if((*root)->left!=NULL){
+            *root=(*root)->left;
+        }
+        else *root=NULL;
+        return aux;
+    }
+    else return maior_direita(&(*root)->right);
+}
+
+
+void remove_tree(Tree **root,int key_remove){
+    if(*root!=NULL){
+
+        if( (*root)->key>key_remove) remove_tree(&(*root)->left,key_remove);
+        else if( (*root)->key < key_remove) remove_tree(&(*root)->right,key_remove);
+
+        else{
+            if((*root)->right==NULL && (*root)->left==NULL){
+                free(*root);
+                *root=NULL;
+            }
+            else if( ((*root)->right !=NULL ) ^ ((*root)->left != NULL)){ // 1 filho
+                Tree *remove_tree=*root;
+                if( (*root)->right!=NULL) *root=(*root)->right;
+                else *root=(*root)->left;
+                free(remove_tree);
+            }
+            else{
+                Tree *aux=maior_direita(&(*root)->left);
+                aux->right=(*root)->right;
+                aux->left=(*root)->left;
+                free(*root);
+                *root=aux;
+            }
+        }   
+    }
 }
