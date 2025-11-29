@@ -14,6 +14,7 @@ void insert(Tree **root,int key);
 void pre_order(Tree *root);
 void in_order(Tree *root);
 void pos_order(Tree *root);
+void print_leaf(Tree *root);
 
 //buscar
 int search(Tree *root,int key);
@@ -21,6 +22,13 @@ int search(Tree *root,int key);
 //remocao
 Tree *maior_direita(Tree **root);
 void remove_tree(Tree **root,int key_remove);
+
+//altura
+int lenth_Tree(Tree *root);
+
+//maior e menor chave
+Tree *biggest_key(Tree *root);
+Tree *smallest(Tree *root);
 
 int main(){
 
@@ -109,6 +117,14 @@ void pos_order(Tree *root){
     }
 }
 
+void print_leaf(Tree *root){
+    if(root!=NULL){
+        if(root->right==NULL && root->left==NULL) printf("|%d|",root->key);
+        print_leaf(root->left);
+        print_leaf(root->right);
+    }
+}
+
 
 int search(Tree *root,int key){
     if(root==NULL) return 0;
@@ -156,4 +172,31 @@ void remove_tree(Tree **root,int key_remove){
             }
         }   
     }
+}
+
+
+int lenth_Tree(Tree *root){
+    if(root==NULL) return -1;
+    else{
+        int left=lenth_Tree(root->left);
+        int right=lenth_Tree(root->right);
+        if(left>=right) return left+1;
+        else return right+1; 
+    }
+}
+
+
+Tree *biggest_key(Tree *root){
+    if(root!=NULL){
+        if(root->right==NULL) return root;
+        else return biggest_key(root->right);
+    }
+    return NULL;
+}
+Tree *smallest(Tree *root){
+    if(root!=NULL){
+        if(root->left==NULL) return root;
+        else return smallest(root->left);
+    }
+    return NULL;
 }
